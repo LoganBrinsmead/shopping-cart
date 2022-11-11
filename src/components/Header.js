@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigation } from "react-router";
-import { Button } from 'reactstrap';
+import Button from 'react-bootstrap/Button';
 import '../styles/Header.scss'
 import logo from './logo.png';
 import cart from './cart.jpg';
@@ -22,16 +22,18 @@ export default function Header(props) {
     //     navigate(path);
     // }
 
+    
+
    return (
        <div className="Header">
            <div className="leftHeader">
                 <img src={ logo } alt="The company logo."></img>
-                <h4>LogeyBay</h4>
+                <h4>LogeyBuster</h4>
 
            </div>
-           <Button className="cartButton" color="primary" cssModule={{btn: 'hyperspeed-btn'}} >
+           <Button variant="primary" >
                 {/* <img src={ cart } alt="A shopping cart."></img> */}
-                { props.count }
+                TestText
            </Button>
        </div>
    );
