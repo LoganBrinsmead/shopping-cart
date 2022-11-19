@@ -1,21 +1,18 @@
-@mixin MarginAndPadding($marginPx, $paddingPx) {
-    margin: $marginPx;
-    padding: $paddingPx;
-}
-
-body {
-    @include MarginAndPadding(0, 0);
-}
+$yellow: #fdec00;
 
 .Header {
-    background-color: lightblue;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    background-color: blue;
 }
 
-.leftHeader {
+.title {
+    color: $yellow;
+}
+
+.sidebar {
+    background-color: red;
     display: flex;
-    flex-direction: row;
-    justify-content:space-evenly;
+    flex-direction: column;
+    right: 50vh;
+    height: 100vh;
+    margin-right: 99vh;
 }

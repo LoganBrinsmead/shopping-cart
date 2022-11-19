@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 // import { useNavigation } from "react-router";
-import Button from 'react-bootstrap/Button';
+import { Button, Container, Row, Col, Image, Badge } from 'react-bootstrap';
 import '../styles/Header.scss'
 import logo from './logo.png';
 import cart from './cart.jpg';
@@ -25,17 +25,21 @@ export default function Header(props) {
     
 
    return (
-       <div className="Header">
-           <div className="leftHeader">
-                <img src={ logo } alt="The company logo."></img>
-                <h4>LogeyBuster</h4>
-
-           </div>
-           <Button variant="primary" >
-                {/* <img src={ cart } alt="A shopping cart."></img> */}
-                TestText
-           </Button>
-       </div>
+       <>
+           <Container fluid className="Header">
+               <Row>
+                            <Col sm={2}><Image src={ logo } alt="The company logo."></Image></Col>
+                            <Col sm={8}><h4 className="title">LogeyBuster</h4></Col>
+                            
+                    <Col sm={2}>
+                    <Button variant="primary" >
+                            Go To Cart
+                            {/* <Image fluid roundedCircle="true" src={ cart }></Image> */} <Badge bg="secondary">{ props.cartCount } </Badge>
+                            </Button>
+                    </Col>
+                    </Row>
+            </Container>
+       </>
    );
 }
 
