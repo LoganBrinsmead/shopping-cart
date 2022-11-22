@@ -5,7 +5,8 @@
  * (full page is of that car)
  */
 import React from "react";
-import { Button } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
+import { useState } from "react";
 
 export default function CarCard(props) {
 
@@ -17,15 +18,19 @@ export default function CarCard(props) {
 
     // TODO: increment count in shopping cart for total items
     // TODO: pass this state as props to cart component
-    const [countInCart, setCount] = useState(0);
 
     return (
         <>
-        <img src={ props.CarImage } alt="A picture of the car."></img>
-        <h2> { props.CarName } </h2>
-        <h4> { props.Make } </h4>
-        <p> { props.CarDescription } </p>
-        <Button onClick={ () => setCount(countInCart + 1) }></Button>
+        <Card>
+            <Card.Img variant="top" src={ props.MovieImage } />
+            <Card.Body>
+                <Card.Title> { props.MovieTitle } </Card.Title>
+                <Card.Text> { props.MovieDescription } </Card.Text>
+                <h4> { props.MovieDirector } </h4>
+                <Button onClick={ props.handleCountInCart }>Add to Cart</Button>
+                <Button>Remove from Cart</Button>
+            </Card.Body>
+        </Card>
         </>
     )
 

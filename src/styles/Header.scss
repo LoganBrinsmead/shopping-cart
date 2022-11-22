@@ -1,18 +1,63 @@
 $yellow: #fdec00;
 
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .Header {
-    background-color: blue;
+    width: 100%;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 25px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    gap : 32px;
 }
 
 .title {
     color: $yellow;
+    font-weight: 600;
+    line-height: 0.8;
+}
+
+.content {
+    display: flex;
+    gap: 32px;
+    margin-left: 100px;
+    margin-top: 52px;
+    flex-wrap: wrap;
+    overflow: scroll;
+}
+
+.body-wrapper {
+    display: inline-block;
 }
 
 .sidebar {
-    background-color: red;
     display: flex;
     flex-direction: column;
-    right: 50vh;
-    height: 100vh;
-    margin-right: 99vh;
+    position: relative;
+    overflow: scroll;
+    background-color: $yellow;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    float: left;
+    margin: 0;
+    height: 100vh !important;
+    width: 80px;
+    z-index: 100;
+    padding: 48px 0 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
+

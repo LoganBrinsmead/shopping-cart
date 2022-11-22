@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 import { Button, Container, Row, Col, Image, Badge } from 'react-bootstrap';
 import '../styles/Header.scss'
 import logo from './logo.png';
-import cart from './cart.jpg';
+import { AiOutlineShoppingCart } from "react-icons/ai";
+import { FcFilm } from "react-icons/fc";
 
 export default function Header(props) {
     /*
@@ -26,19 +27,19 @@ export default function Header(props) {
 
    return (
        <>
-           <Container fluid className="Header">
-               <Row>
-                            <Col sm={2}><Image src={ logo } alt="The company logo."></Image></Col>
-                            <Col sm={8}><h4 className="title">LogeyBuster</h4></Col>
+           <div fluid className="Header">
+            <div className="logo">
+                <FcFilm size={ 70 }/>
+                <h4 className="title">LogeyBuster</h4>
+            </div>
                             
-                    <Col sm={2}>
+                    
                     <Button variant="primary" >
-                            Go To Cart
-                            {/* <Image fluid roundedCircle="true" src={ cart }></Image> */} <Badge bg="secondary">{ props.cartCount } </Badge>
+                        <AiOutlineShoppingCart size={ 30 }/>
+                            {/* <Image fluid roundedCircle="true" src={ cart }></Image> */} <Badge bg="secondary">{ props.countInCart } </Badge>
                             </Button>
-                    </Col>
-                    </Row>
-            </Container>
+                    
+            </div>
        </>
    );
 }
