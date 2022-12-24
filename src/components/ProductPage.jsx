@@ -1,4 +1,3 @@
-import react from "react";
 import Image from 'react-bootstrap/Image';
 import Review from './Review';
 

@@ -1,15 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import PropTypes from 'prop-types';
-import App from "./App"
+import Home from "./components/Home";
+import ShoppingCart from "./components/ShoppingCart";
 
-const RouteSwitch = () => {
+const RouteSwitch = (props) => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={<App />} />
+                <Route path="/" element={<Home
+                    shoppingCart={props.shoppingCart}
+                    countInCart={props.countInCart}
+                    moviesArray={props.moviesArray}
+                    genresArray={props.genresArray}
+                    setCount={props.setCount}
+                    setCart={props.setCart} />} />
+                <Route path="/shoppingcart" element={<ShoppingCart
+                    cart={props.shoppingCart} />} />
             </Routes>
         </BrowserRouter>
     );
 };
 
-export default RouteSwitch
+export default RouteSwitch;

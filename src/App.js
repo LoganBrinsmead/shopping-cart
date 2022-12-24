@@ -1,87 +1,82 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes } from "react-router-dom";
-import Header from './components/Header';
-import Sidebar from './components/Sidebar';
-import logo from "./components/logo.png";
-import MovieCard from './components/MovieCard';
+import RouteSwitch from "./RouteSwitch";
 import axios from 'axios';
 import './App.css';
 
 const App = () => {
 
+  ///// STATE /////////
+  const [countInCart, setCount] = useState(0);
+  const [moviesArray, setMovies] = useState([]);
+  const [genresArray, setGenres] = useState([]);
+  const [cart, setCart] = useState([]);
+
+  ///// API CALLS //////
   async function loadMovies() {
     const promise = await axios.get("http://127.0.0.1:8081/api/v1/movie/");
     const status = promise.status;
     if (status === 200) {
       const data = promise.data;
-      setMoviesArray(data);
+      data.forEach(el => {
+        el["quantity"] = 0;
+      });
+      setMovies(data);
     }
   }
 
+  async function getGenres() {
+    const promise = await axios.get("http://127.0.0.1:8081/api/v1/movie/genres");
+    const status = promise.status;
+    if (status === 200) {
+      const data = promise.data;
+      setGenres(data);
+    }
+  }
 
+  /////// STATE FUNCTIONS //////
+  // adding item to cart
+  // TODO: check this works
+  const addItemToCart = item => {
+    let updateObj = cart.find(cartItem => cartItem.title === item.title)
+    if(updateObj) {
+      const updatedObj = {...updateObj, quantity: quantity + 1}
+      setCart(
+        ...cart, 
+        updatedObj
+      );
+    } else {
+      setCart(
+        ...cart, 
+        item
+      );
+    }
+    
+  }
+
+  // incrementing the count in the cart
+  setCount(countInCart + 1);
+
+  ////// USEEFFECT ////////
   useEffect(() => {
+    const controller = new AbortController();
     loadMovies();
+    getGenres();
+
+    return () => controller.abort();      // TODO: check if cleanup works
   }, [])
 
-  const [countInCart, setCount] = useState(0);
-  const [moviesArray, setMoviesArray] = useState([]);
-  const [cart, setCart] = useState([]);
-
-  const handleCountInCart = (item) => {
-
-    // adding an item to the cart
-    setCart(...cart, { i: 0, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" });
-
-    // incrementing the count in the cart
-    setCount(countInCart + 1);
-  };
-
-  let stuff = [
-    { i: 0, genre: 'rock' },
-    { i: 1, genre: 'pop' },
-    { i: 2, genre: 'espanol' },
-    { i: 3, genre: 'yeerr' }
-  ]
-
-  let exampleMovies = [
-    { i: 0, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 1, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 2, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 3, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 4, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 5, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-    { i: 6, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" },
-
-    { i: 7, MovieImage: logo, MovieTitle: "BladeRunner", MovieDescription: "AWESOMEST MOVIE EVER", MovieDirector: "Logey Brinsmead" }
-
-  ]
-
+  // TODO: setCart needs to be passed as props and/or isnt populating items correctly
 
   return (
-    <div>
-      <div className="app">
-        <Header countInCart={countInCart} />
-        <div className="body-wrapper">
-          <Sidebar genres={stuff} />
-          <div className="content">
-            {moviesArray.map((movie, index) => {
-              return (
-                <MovieCard
-                  key={index}
-                  MovieImage={movie.image}
-                  MovieTitle={movie.title}
-                  MovieDescription={"Placeholder"}
-                  MovieDirector={movie.director_name}
-                  handleCountInCart={handleCountInCart}
-                />
-              )
-            })}
-
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <>
+      <RouteSwitch
+        shoppingCart={cart}
+        countInCart={countInCart}
+        moviesArray={moviesArray}
+        genresArray={genresArray}
+        setCount={setCount}
+      />
+    </>
   )
 }
 

@@ -45,13 +45,38 @@ body {
 .sidebar {
   display: flex;
   flex-direction: column;
-  position: relative;
+  position: fixed;
   overflow: scroll;
-  top: 0;
-  left: 0;
   float: left;
   margin: 0;
   height: 100vh !important;
   width: 80px;
   padding: 48px 0 0;
-}/*# sourceMappingURL=HeaderFormatting.css.map */
+}
+
+body {
+  padding: 0px;
+  margin: 0px;
+}
+
+.Header {
+  background-color: black;
+}
+
+.title {
+  color: #fdec00;
+  font-weight: 600;
+  line-height: 0.8;
+}
+
+.MovieImage {
+  height: auto;
+  max-height: 250px;
+  width: auto;
+  max-width: 250px;
+}
+
+.sidebar {
+  background-color: #fdec00;
+  box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+}/*# sourceMappingURL=Sidebar.css.map */

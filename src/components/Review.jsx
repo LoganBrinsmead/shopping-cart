@@ -1,7 +1,6 @@
-import react from "react";
 import Container from 'react-bootstrap';
 
-export default function Review() {
+const Review = () => {
 
     return (
         <>
@@ -14,3 +13,5 @@ export default function Review() {
         </>
     )
 }
+
+export default Review;
