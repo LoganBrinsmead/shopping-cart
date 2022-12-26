@@ -23,6 +23,7 @@ const Home = (props) => {
                     setCount={props.setCount}
                     setCart={props.setCart}
                     movie={movie}
+                    addItemToCart={props.addItemToCart}
                   />
                 </>
               )

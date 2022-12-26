@@ -12,7 +12,8 @@ const RouteSwitch = (props) => {
                     moviesArray={props.moviesArray}
                     genresArray={props.genresArray}
                     setCount={props.setCount}
-                    setCart={props.setCart} />} />
+                    setCart={props.setCart}
+                    addItemToCart={props.addItemToCart} />} />
                 <Route path="/shoppingcart" element={<ShoppingCart
                     cart={props.shoppingCart} />} />
             </Routes>

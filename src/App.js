@@ -34,27 +34,29 @@ const App = () => {
   }
 
   /////// STATE FUNCTIONS //////
-  // adding item to cart
-  // TODO: check this works
-  const addItemToCart = item => {
-    let updateObj = cart.find(cartItem => cartItem.title === item.title)
-    if(updateObj) {
-      const updatedObj = {...updateObj, quantity: quantity + 1}
-      setCart(
-        ...cart, 
-        updatedObj
-      );
-    } else {
-      setCart(
-        ...cart, 
-        item
-      );
-    }
-    
-  }
 
-  // incrementing the count in the cart
-  setCount(countInCart + 1);
+  function addItemToCart(item) {
+    let quantity = 1;
+    console.log(cart);
+    setCount(countInCart + 1);
+    const update = cart.map(cartItem => {
+      if(cartItem.title === item.title) {
+        let quantity = cartItem.quantity + 1
+        return {...cartItem, quantity: quantity};
+      } else {
+        return cartItem;
+      }
+    });
+    for (let cartItem of cart) {
+      if (cartItem.title === item.title) {
+        return setCart( update);
+      }
+    }
+    item.quantity = quantity;
+    return setCart( current =>[ ...current, item]);
+
+
+  }
 
   ////// USEEFFECT ////////
   useEffect(() => {
@@ -74,7 +76,7 @@ const App = () => {
         countInCart={countInCart}
         moviesArray={moviesArray}
         genresArray={genresArray}
-        setCount={setCount}
+        addItemToCart={addItemToCart}
       />
     </>
   )

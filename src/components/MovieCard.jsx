@@ -13,8 +13,7 @@ const MovieCard = (props) => {
                     <Card.Text> {props.MovieGenre} </Card.Text>
                     <h4> {props.MovieDirector} </h4>
                     <Button onClick={() => {
-                        props.setCount;
-                        props.setCart(props.movie);
+                        props.addItemToCart(props.movie);
                         }}>
                             Add to Cart
                             </Button>
